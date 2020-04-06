@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert} from "react-bootstrap";
+import {Alert, Button, Form} from "react-bootstrap";
 import axios from "axios";
 
 
@@ -54,7 +54,7 @@ class Login extends Component {
             })
             .catch(error => {
                 this.setState({
-                    error: "you did not logged in",
+                    error: error.toString(),
                     message: ''
                 })
             })
@@ -71,13 +71,14 @@ class Login extends Component {
 
                 {errorAlert}
 
-                <form onSubmit={this.submitHandler}>
+                <Form onSubmit={this.submitHandler}>
                     <input type="text" onChange={this.emailChangeHandler} placeholder="Enter the email address"/>
                     <br/>
                     <input type="text" onChange={this.passwordChangeHandler} placeholder="Enter the password"/>
                     <br/>
-                    <button type="submit" onClick={this.clickHandler}>Log in</button>
-                </form>
+                    <Button variant="primary" type="submit" onClick={this.clickHandler}>Log in</Button>
+                    <br/>
+                </Form>
             </div>
 
         );
