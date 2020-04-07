@@ -8,9 +8,9 @@ class User extends Component {
     constructor() {
         super();
         this.state = {
-            user: "",
-            message: "",
-            error: ""
+            user: '',
+            message: '',
+            error: ''
         }
 
         const token = Cookie.get('token')
@@ -27,10 +27,9 @@ class User extends Component {
 
         axios.get(`http://127.0.0.1:8000/api/auth/user`, config)
             .then(response => {
-                console.log(response)
                 this.setState({
                     user: response.data.name,
-                    message: "you login in successfully"
+                    message: "you login as successfully"
                 })
 
             })
@@ -44,18 +43,18 @@ class User extends Component {
 
 
     render() {
-        let successAlert = this.state.message !== '' ? <Alert  variant="success">
-            {this.state.message} , hello {this.state.user}</Alert>: ''
-        let errorAlert = this.state.error !== '' ? <Alert  variant="danger">
+        let successAlert = this.state.message !== '' ? <Alert variant="success">
+            {this.state.message} , hello {this.state.user}</Alert> : ''
+        let errorAlert = this.state.error !== '' ? <Alert variant="danger">
             {this.state.error} </Alert> : ''
 
         return (
-                <div>
-                    {successAlert}
-                    {errorAlert}
-                </div>
-            );
-        }
+            <div>
+                {successAlert}
+                {errorAlert}
+            </div>
+        );
     }
+}
 
 export default User;

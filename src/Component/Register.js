@@ -63,13 +63,12 @@ class Register extends Component {
         axios.post(`http://127.0.0.1:8000/api/auth/signup`, register, config)
             .then(res => {
                 this.setState({
-                    message: "you registered in successfully",
+                    message: "you registered as successfully",
                     error: ''
                 })
 
             })
             .catch(error => {
-                console.log(error)
                 this.setState({
                     error: error.toString(),
                     message: ''

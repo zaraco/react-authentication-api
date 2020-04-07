@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Alert, Button, Form} from "react-bootstrap";
+import {Alert, Button, Col, Form} from "react-bootstrap";
 import axios from "axios";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
+import login from "./Login.module.css"
 
 
 class Login extends Component {
@@ -64,24 +65,32 @@ class Login extends Component {
     }
 
     render() {
-        let successAlert = this.state.message !== '' ? <Alert  variant="success">
-            {this.state.message} </Alert>: ''
-        let errorAlert = this.state.error !== '' ? <Alert  variant="danger">
+        let successAlert = this.state.message !== '' ? <Alert variant="success">
+            {this.state.message} </Alert> : ''
+        let errorAlert = this.state.error !== '' ? <Alert variant="danger">
             {this.state.error} </Alert> : ''
         return (
             <div>
-                {successAlert}
+                        {successAlert}
 
-                {errorAlert}
+                        {errorAlert}
 
-                <Form onSubmit={this.submitHandler}>
-                    <input type="text" onChange={this.emailChangeHandler} placeholder="Enter the email address"/>
-                    <br/>
-                    <input type="text" onChange={this.passwordChangeHandler} placeholder="Enter the password"/>
-                    <br/>
-                    <Button variant="primary" type="submit" onClick={this.clickHandler}>Log in</Button>
-                    <br/>
-                </Form>
+                        <Form onSubmit={this.submitHandler}>
+                            <Form.Group>
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email"
+                                              onChange={this.emailChangeHandler}/>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Enter email"
+                                              onChange={this.passwordChangeHandler}/>
+                            </Form.Group>
+                            <Button id={login.primary} type="submit" onClick={this.clickHandler}>Log in</Button>
+
+                        </Form>
+
             </div>
 
         );
