@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, Button, Form} from "react-bootstrap";
 import axios from "axios";
+import Cookie from "js-cookie"
 
 
 class Login extends Component {
@@ -47,6 +48,8 @@ class Login extends Component {
         console.log(login)
         axios.post(`http://127.0.0.1:8000/api/auth/login`, login, config)
             .then(res => {
+                Cookie.set("token", res.data.access_token);
+
                 this.setState({
                     message: "you logged in successfully",
                     error: ''
