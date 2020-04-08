@@ -6,6 +6,7 @@ import Login from "./Component/Login";
 import Register from "./Component/Register";
 import User from "./Component/User";
 import Home from "./Component/Home";
+import Logout from "./Component/Logout";
 import {Button, Col, Container, Form, FormControl, Nav, Navbar, Row} from "react-bootstrap";
 
 
@@ -23,6 +24,7 @@ class App extends Component {
                                         <Nav.Link href="/login">Login</Nav.Link>
                                         <Nav.Link href="/register">Register</Nav.Link>
                                         <Nav.Link href="/user">User</Nav.Link>
+                                        <Nav.Link href="/logout">Logout</Nav.Link>
                                     </Nav>
                                     <Form inline>
                                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
@@ -36,6 +38,7 @@ class App extends Component {
                                         <Route path="/login" component={Login}/>
                                         <Route path="/register" component={Register}/>
                                         <Route path="/user" component={User}/>
+                                        <Route path="/Logout" component={Logout}/>
                                     </Switch>
                                 </Router>
                             </Col>
