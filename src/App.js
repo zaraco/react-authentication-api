@@ -6,45 +6,72 @@ import Login from "./Component/Login";
 import Register from "./Component/Register";
 import User from "./Component/User";
 import Home from "./Component/Home";
-import Logout from "./Component/Logout";
-import {Button, Col, Container, Form, FormControl, Nav, Navbar, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, FormControl, Nav, Navbar, NavLink, Row} from "react-bootstrap";
+import Cookie from "js-cookie";
 
 
 class App extends Component {
 
+    constructor() {
+        super();
+        if(Cookie.get("token")){
+            this.state = {
+                isLogin: true
+            }
+        } else {
+            this.state = {
+                isLogin: false
+            }
+
+        }
+    }
+
+    clickHandler =()=> {
+        Cookie.remove("token");
+        this.setState({
+            isLogin: false
+        })
+
+    }
+
     render() {
+        let navString;
+        if (!this.state.isLogin) {
+            navString = <Nav className="mr-auto">
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+            </Nav>
+        } else {
+            navString = <Nav className="mr-auto">
+                <Nav.Link href="/user">User</Nav.Link>
+            </Nav>
+        }
+
         return (
             <div>
                 <Container>
-                        <Row>
-                            <Col>
-                                <Navbar expand="lg" bg="dark" variant="dark">
-                                    <Navbar.Brand href="/home">Home</Navbar.Brand>
-                                    <Nav className="mr-auto">
-                                        <Nav.Link href="/login">Login</Nav.Link>
-                                        <Nav.Link href="/register">Register</Nav.Link>
-                                        <Nav.Link href="/user">User</Nav.Link>
-                                        <Nav.Link href="/logout">Logout</Nav.Link>
-                                    </Nav>
-                                    <Form inline>
-                                        <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-                                        <Button variant="outline-info">Search</Button>
-                                    </Form>
-
-                                </Navbar>
-                                <Router>
-                                    <Switch>
-                                        <Route path="/home" component={Home}/>
-                                        <Route path="/login" component={Login}/>
-                                        <Route path="/register" component={Register}/>
-                                        <Route path="/user" component={User}/>
-                                        <Route path="/Logout" component={Logout}/>
-                                    </Switch>
-                                </Router>
-                            </Col>
-                        </Row>
+                    <Row>
+                        <Col>
+                            <Navbar expand="lg" bg="dark" variant="dark">
+                                <Navbar.Brand href="/home">Home</Navbar.Brand>
+                                {navString}
 
 
+                                {(this.state.isLogin) ? <Button variant="outline-info" onClick={this.clickHandler}>Logout</Button> : ''}
+
+                            </Navbar>
+
+
+                            <Router>
+                                <Switch>
+                                    <Route path="/home" component={Home}/>
+                                    <Route path="/login" component={Login}/>
+                                    <Route path="/register" component={Register}/>
+                                    <Route path="/user" component={User}/>
+                                </Switch>
+                            </Router>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
